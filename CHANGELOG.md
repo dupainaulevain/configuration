@@ -1,3 +1,7 @@
+- Role: common
+  - Added `COMMON_FALLBACK_DNS_SERVERS`, which optionally adds additional `nameserver` entries to the resolvconf tail
+  - Explicitly added `resolvconf` as a dependency
+
 - Role: ecommerce
   - Added CORS_ORIGIN_WHITELIST and CORS_URLS_REGEX to allow selective CORS whitelisting of origins/urls. 
 
