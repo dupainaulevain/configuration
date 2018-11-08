@@ -1,0 +1,82 @@
+---
+BLOCKSTORE_GIT_IDENTITY: !!null
+BLOCKSTORE_ENABLED: True
+
+BLOCKSTORE_GUNICORN_WORKERS: "2"
+BLOCKSTORE_GUNICORN_EXTRA: ""
+BLOCKSTORE_GUNICORN_EXTRA_CONF: ""
+BLOCKSTORE_GUNICORN_WORKER_CLASS: "gevent"
+BLOCKSTORE_GUNICORN_MAX_REQUESTS: null
+
+BLOCKSTORE_DEFAULT_DB_NAME: 'blockstore'
+BLOCKSTORE_DATABASE_USER: "blkstr01"
+BLOCKSTORE_DATABASE_PASSWORD: "password"
+BLOCKSTORE_DATABASE_HOST: "localhost"
+BLOCKSTORE_DATABASE_PORT: 3306
+
+BLOCKSTORE_DJANGO_SETTINGS_MODULE: "blockstore.settings.production"
+
+BLOCKSTORE_SESSION_EXPIRE_AT_BROWSER_CLOSE: false
+BLOCKSTORE_SECRET_KEY: 'Your secret key here'
+BLOCKSTORE_LANGUAGE_CODE: 'en-us'
+BLOCKSTORE_BLOCKSTORE_URL_ROOT: 'http://localhost:8003'
+BLOCKSTORE_LOGOUT_URL: '{{ BLOCKSTORE_BLOCKSTORE_URL_ROOT }}/logout/'
+BLOCKSTORE_LMS_URL_ROOT: 'http://127.0.0.1:8000'
+
+BLOCKSTORE_GIT_PATH: 'open-craft'
+#TODO:change branch to master once changes included in below branch is merged
+BLOCKSTORE_VERSION: 'pooja/deploy-blockstore-to-labxchange'
+
+# Used to automatically configure OAuth2 Client
+BLOCKSTORE_SOCIAL_AUTH_EDX_OIDC_KEY : 'blockstore-key'
+BLOCKSTORE_SOCIAL_AUTH_EDX_OIDC_SECRET : 'blockstore-secret'
+BLOCKSTORE_SOCIAL_AUTH_REDIRECT_IS_HTTPS: false
+
+# Settings for affiliate cookie tracking
+BLOCKSTORE_AFFILIATE_COOKIE_NAME: '{{ EDXAPP_AFFILIATE_COOKIE_NAME | default("dev_affiliate_id") }}'
+
+# See edx_django_service_automated_users for an example of what this should be
+BLOCKSTORE_AUTOMATED_USERS: {}
+
+blockstore_service_config_overrides:
+  BLOCKSTORE_URL_ROOT: '{{ BLOCKSTORE_BLOCKSTORE_URL_ROOT }}'
+  AFFILIATE_COOKIE_KEY: '{{ BLOCKSTORE_AFFILIATE_COOKIE_NAME }}'
+
+
+blockstore_service_name: "blockstore"
+blockstore_user: "{{ blockstore_service_name }}"
+blockstore_home: "{{ COMMON_APP_DIR }}/{{ blockstore_service_name }}"
+blockstore_code_dir: "{{ blockstore_home }}/{{ blockstore_service_name }}"
+blockstore_venv_dir: "{{ blockstore_home }}/venvs/{{ blockstore_service_name }}"
+blockstore_gunicorn_host: "127.0.0.1"
+blockstore_gunicorn_port: "8302"
+blockstore_gunicorn_timeout: "300"
+
+BLOCKSTORE_NEWRELIC_APPNAME: "{{ COMMON_ENVIRONMENT }}-{{ COMMON_DEPLOYMENT }}-{{ blockstore_service_name }}"
+
+BLOCKSTORE_NGINX_PORT: "{{ blockstore_gunicorn_port }}"
+BLOCKSTORE_SSL_NGINX_PORT: "{{ blockstore_gunicorn_port }}"
+
+blockstore_environment:
+  BLOCKSTORE_CFG: "{{ COMMON_CFG_DIR }}/{{ blockstore_service_name }}.yml"
+
+BLOCKSTORE_REPOS:
+  - PROTOCOL: "{{ COMMON_GIT_PROTOCOL }}"
+    DOMAIN: "{{ COMMON_GIT_MIRROR }}"
+    PATH: "{{ BLOCKSTORE_GIT_PATH }}"
+    REPO: 'blockstore.git'
+    VERSION: "{{ BLOCKSTORE_VERSION }}"
+    DESTINATION: "{{ blockstore_code_dir }}"
+    SSH_KEY: "{{ BLOCKSTORE_GIT_IDENTITY }}"
+
+#
+# OS packages
+#
+
+blockstore_debian_pkgs:
+  - libmysqlclient-dev
+  - libjpeg-dev
+  - libssl-dev
+  - libffi-dev
+
+blockstore_redhat_pkgs: []

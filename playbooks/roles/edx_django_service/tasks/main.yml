@@ -41,12 +41,39 @@
     - install
     - install:system-requirements
 
+- name: add python3.6 repository from ppa
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+    update_cache: yes
+  when: edx_django_service_use_python3.6
+  tags:
+    - install
+    - install:system-requirements
+
+- name: install python3.6
+  apt:
+    name: python3.6-dev
+  when: edx_django_service_use_python3.6
+  tags:
+    - install
+    - install:system-requirements
+
 - name: build virtualenv with python3
   command: "virtualenv --python=python3 {{ edx_django_service_venv_dir }}"
   args:
     creates: "{{ edx_django_service_venv_dir }}/bin/pip"
   become_user: "{{ edx_django_service_user }}"
   when: edx_django_service_use_python3
+  tags:
+    - install
+    - install:system-requirements
+
+- name: build virtualenv with python3.6
+  command: "virtualenv --python=python3.6 {{ edx_django_service_venv_dir }}"
+  args:
+    creates: "{{ edx_django_service_venv_dir }}/bin/pip3.6"
+  become_user: "{{ edx_django_service_user }}"
+  when: edx_django_service_use_python3.6
   tags:
     - install
     - install:system-requirements
@@ -94,6 +121,18 @@
     chdir: "{{ edx_django_service_code_dir }}"
   become_user: "{{ edx_django_service_user }}"
   environment: "{{ edx_django_service_environment }}"
+  when: not edx_django_service_without_make_targets
+  tags:
+    - install
+    - install:app-requirements
+
+- name: install requirements
+  command: pip install -r requirements.txt
+  args:
+    chdir: "{{ edx_django_service_code_dir }}"
+  become_user: "{{ edx_django_service_user }}"
+  environment: "{{ edx_django_service_environment }}"
+  when: edx_django_service_without_make_targets
   tags:
     - install
     - install:app-requirements
@@ -117,7 +156,19 @@
     chdir: "{{ edx_django_service_code_dir }}"
   become_user: "{{ edx_django_service_user }}"
   environment: "{{ edx_django_service_migration_environment }}"
-  when: migrate_db is defined and migrate_db|lower == "yes"
+  when: migrate_db is defined and migrate_db|lower == "yes" and not edx_django_service_without_make_targets
+  run_once: yes
+  tags:
+    - migrate
+    - migrate:db
+
+- name: migrate db
+  command: python manage.py migrate
+  args:
+    chdir: "{{ edx_django_service_code_dir }}"
+  become_user: "{{ edx_django_service_user }}"
+  environment: "{{ edx_django_service_migration_environment }}"
+  when: migrate_db is defined and migrate_db|lower == "yes" and edx_django_service_without_make_targets
   run_once: yes
   tags:
     - migrate

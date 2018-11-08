@@ -30,6 +30,7 @@
     SANDBOX_ENABLE_INSIGHTS: true
     SANDBOX_ENABLE_RABBITMQ: true
     JOURNALS_ENABLED: false
+    BLOCKSTORE_ENABLED: false
   roles:
     - role: swapfile
       SWAPFILE_SIZE: 4GB
@@ -88,3 +89,5 @@
       when: POSTFIX_QUEUE_EXTERNAL_SMTP_HOST != ''
     - role: datadog-uninstall
       when: not COMMON_ENABLE_DATADOG
+    - role: blockstore
+      when: BLOCKSTORE_ENABLED
