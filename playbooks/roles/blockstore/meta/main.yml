@@ -42,4 +42,3 @@ dependencies:
     edx_django_service_session_expire_at_browser_close: '{{ BLOCKSTORE_SESSION_EXPIRE_AT_BROWSER_CLOSE }}'
     edx_django_service_automated_users: '{{ BLOCKSTORE_AUTOMATED_USERS }}'
     edx_django_service_has_static_assets: false
-    edx_django_service_without_make_targets: true

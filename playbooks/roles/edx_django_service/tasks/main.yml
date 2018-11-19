@@ -121,18 +121,6 @@
     chdir: "{{ edx_django_service_code_dir }}"
   become_user: "{{ edx_django_service_user }}"
   environment: "{{ edx_django_service_environment }}"
-  when: not edx_django_service_without_make_targets
-  tags:
-    - install
-    - install:app-requirements
-
-- name: install requirements
-  command: pip install -r requirements.txt
-  args:
-    chdir: "{{ edx_django_service_code_dir }}"
-  become_user: "{{ edx_django_service_user }}"
-  environment: "{{ edx_django_service_environment }}"
-  when: edx_django_service_without_make_targets
   tags:
     - install
     - install:app-requirements
@@ -156,19 +144,7 @@
     chdir: "{{ edx_django_service_code_dir }}"
   become_user: "{{ edx_django_service_user }}"
   environment: "{{ edx_django_service_migration_environment }}"
-  when: migrate_db is defined and migrate_db|lower == "yes" and not edx_django_service_without_make_targets
-  run_once: yes
-  tags:
-    - migrate
-    - migrate:db
-
-- name: migrate db
-  command: python manage.py migrate
-  args:
-    chdir: "{{ edx_django_service_code_dir }}"
-  become_user: "{{ edx_django_service_user }}"
-  environment: "{{ edx_django_service_migration_environment }}"
-  when: migrate_db is defined and migrate_db|lower == "yes" and edx_django_service_without_make_targets
+  when: migrate_db is defined and migrate_db|lower == "yes"
   run_once: yes
   tags:
     - migrate

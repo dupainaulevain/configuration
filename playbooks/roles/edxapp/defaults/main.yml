@@ -670,8 +670,8 @@ EDXAPP_JOURNALS_URL_ROOT: "https://journals-{{ EDXAPP_LMS_BASE }}"
 EDXAPP_JOURNALS_API_URL: "https://journals-{{ EDXAPP_LMS_BASE }}/api/v1/"
 
 # Blockstore Related Settings
-EDXAPP_BLOCKSTORE_PUBLIC_URL_ROOT: "http://localhost:8003"
-EDXAPP_BLOCKSTORE_API_URL: "http://localhost:8003/api/v1"
+EDXAPP_BLOCKSTORE_PUBLIC_URL_ROOT: "http://localhost:8250"
+EDXAPP_BLOCKSTORE_API_URL: "http://localhost:8250/api/v1"
 
 # which access.py permission name to check in order to determine if a course about page is
 # visible. We default this to the legacy permission 'see_exists'.

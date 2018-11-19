@@ -19,7 +19,7 @@ BLOCKSTORE_DJANGO_SETTINGS_MODULE: "blockstore.settings.production"
 BLOCKSTORE_SESSION_EXPIRE_AT_BROWSER_CLOSE: false
 BLOCKSTORE_SECRET_KEY: 'Your secret key here'
 BLOCKSTORE_LANGUAGE_CODE: 'en-us'
-BLOCKSTORE_BLOCKSTORE_URL_ROOT: 'http://localhost:8003'
+BLOCKSTORE_BLOCKSTORE_URL_ROOT: 'http://localhost:8250'
 BLOCKSTORE_LOGOUT_URL: '{{ BLOCKSTORE_BLOCKSTORE_URL_ROOT }}/logout/'
 BLOCKSTORE_LMS_URL_ROOT: 'http://127.0.0.1:8000'
 
@@ -49,13 +49,13 @@ blockstore_home: "{{ COMMON_APP_DIR }}/{{ blockstore_service_name }}"
 blockstore_code_dir: "{{ blockstore_home }}/{{ blockstore_service_name }}"
 blockstore_venv_dir: "{{ blockstore_home }}/venvs/{{ blockstore_service_name }}"
 blockstore_gunicorn_host: "127.0.0.1"
-blockstore_gunicorn_port: "8302"
+blockstore_gunicorn_port: "8250"
 blockstore_gunicorn_timeout: "300"
 
 BLOCKSTORE_NEWRELIC_APPNAME: "{{ COMMON_ENVIRONMENT }}-{{ COMMON_DEPLOYMENT }}-{{ blockstore_service_name }}"
 
-BLOCKSTORE_NGINX_PORT: "{{ blockstore_gunicorn_port }}"
-BLOCKSTORE_SSL_NGINX_PORT: "{{ blockstore_gunicorn_port }}"
+BLOCKSTORE_NGINX_PORT: "1{{ blockstore_gunicorn_port }}"
+BLOCKSTORE_SSL_NGINX_PORT: "4{{ blockstore_gunicorn_port }}"
 
 blockstore_environment:
   BLOCKSTORE_CFG: "{{ COMMON_CFG_DIR }}/{{ blockstore_service_name }}.yml"
