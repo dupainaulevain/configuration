@@ -52,13 +52,12 @@ blockstore_gunicorn_host: "127.0.0.1"
 blockstore_gunicorn_port: "8250"
 blockstore_gunicorn_timeout: "300"
 
-BLOCKSTORE_NEWRELIC_APPNAME: "{{ COMMON_ENVIRONMENT }}-{{ COMMON_DEPLOYMENT }}-{{ blockstore_service_name }}"
-
 BLOCKSTORE_NGINX_PORT: "1{{ blockstore_gunicorn_port }}"
 BLOCKSTORE_SSL_NGINX_PORT: "4{{ blockstore_gunicorn_port }}"
 
 blockstore_environment:
   BLOCKSTORE_CFG: "{{ COMMON_CFG_DIR }}/{{ blockstore_service_name }}.yml"
+  VIRTUAL_ENV: "{{ blockstore_venv_dir }}"
 
 BLOCKSTORE_REPOS:
   - PROTOCOL: "{{ COMMON_GIT_PROTOCOL }}"

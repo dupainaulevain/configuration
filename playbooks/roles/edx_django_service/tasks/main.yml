@@ -45,7 +45,7 @@
   apt_repository:
     repo: ppa:deadsnakes/ppa
     update_cache: yes
-  when: edx_django_service_use_python3.6
+  when: edx_django_service_use_python3_6
   tags:
     - install
     - install:system-requirements
@@ -53,7 +53,7 @@
 - name: install python3.6
   apt:
     name: python3.6-dev
-  when: edx_django_service_use_python3.6
+  when: edx_django_service_use_python3_6
   tags:
     - install
     - install:system-requirements
@@ -73,7 +73,7 @@
   args:
     creates: "{{ edx_django_service_venv_dir }}/bin/pip3.6"
   become_user: "{{ edx_django_service_user }}"
-  when: edx_django_service_use_python3.6
+  when: edx_django_service_use_python3_6
   tags:
     - install
     - install:system-requirements
@@ -83,7 +83,7 @@
   args:
     creates: "{{ edx_django_service_venv_dir }}/bin/pip"
   become_user: "{{ edx_django_service_user }}"
-  when: not edx_django_service_use_python3
+  when: not edx_django_service_use_python3 and not edx_django_service_use_python3_6
   tags:
     - install
     - install:system-requirements
