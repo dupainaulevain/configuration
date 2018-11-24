@@ -1,4 +1,8 @@
 ---
+# Role to deploy Blockstore, the next-generation Open edX Learning Object Repository
+#
+# github: https://github.com/open-craft/blockstore
+#
 BLOCKSTORE_GIT_IDENTITY: !!null
 BLOCKSTORE_ENABLED: True
 
