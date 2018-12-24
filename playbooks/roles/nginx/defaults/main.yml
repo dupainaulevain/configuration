@@ -120,6 +120,8 @@ NGINX_EDXAPP_PROXY_INTERCEPT_ERRORS: false
 
 CMS_HOSTNAME: '~^((stage|prod)-)?studio.*'
 
+EDX_NOTES_API_HOSTNAME: '~^((stage|prod)-)?notes.*'
+
 nginx_template_dir: "edx/app/nginx/sites-available"
 
 nginx_xserver_gunicorn_hosts:
@@ -180,7 +182,7 @@ NGINX_EDXAPP_CMS_APP_EXTRA: ""
 # Extra settings to add to site configuration for LMS
 NGINX_EDXAPP_LMS_APP_EXTRA: ""
 
-# List of subnet or IP addressess to allow to access admin endpoints 
+# List of subnet or IP addressess to allow to access admin endpoints
 NGINX_ADMIN_ACCESS_CIDRS: []
 
 # Set trusted network subnets or IP addresses to send correct replacement addresses
