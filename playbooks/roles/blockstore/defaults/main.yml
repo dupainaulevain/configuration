@@ -28,8 +28,7 @@ BLOCKSTORE_LOGOUT_URL: '{{ BLOCKSTORE_BLOCKSTORE_URL_ROOT }}/logout/'
 BLOCKSTORE_LMS_URL_ROOT: 'http://127.0.0.1:8000'
 
 BLOCKSTORE_GIT_PATH: 'open-craft'
-#TODO:change branch to master once changes included in below branch is merged
-BLOCKSTORE_VERSION: 'pooja/deploy-blockstore-to-labxchange'
+BLOCKSTORE_VERSION: 'master'
 
 # Used to automatically configure OAuth2 Client
 BLOCKSTORE_SOCIAL_AUTH_EDX_OIDC_KEY : 'blockstore-key'
