@@ -57,6 +57,7 @@ blockstore_gunicorn_host: "127.0.0.1"
 blockstore_gunicorn_port: "8250"
 blockstore_gunicorn_timeout: "300"
 
+BLOCKSTORE_NGINX_HOSTNAME: '~^((stage|prod)-)?{{ blockstore_service_name }}.*'
 BLOCKSTORE_NGINX_PORT: "1{{ blockstore_gunicorn_port }}"
 BLOCKSTORE_SSL_NGINX_PORT: "4{{ blockstore_gunicorn_port }}"
 
