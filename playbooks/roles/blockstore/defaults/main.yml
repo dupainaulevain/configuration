@@ -18,6 +18,8 @@ BLOCKSTORE_DATABASE_PASSWORD: "password"
 BLOCKSTORE_DATABASE_HOST: "localhost"
 BLOCKSTORE_DATABASE_PORT: 3306
 
+BLOCKSTORE_ELASTICSEARCH_URL: ""
+
 BLOCKSTORE_DJANGO_SETTINGS_MODULE: "blockstore.settings.production"
 
 BLOCKSTORE_SESSION_EXPIRE_AT_BROWSER_CLOSE: false
@@ -60,6 +62,7 @@ BLOCKSTORE_SSL_NGINX_PORT: "4{{ blockstore_gunicorn_port }}"
 
 blockstore_environment:
   BLOCKSTORE_CFG: "{{ COMMON_CFG_DIR }}/{{ blockstore_service_name }}.yml"
+  ELASTICSEARCH_URL: "{{ BLOCKSTORE_ELASTICSEARCH_URL }}"
   VIRTUAL_ENV: "{{ blockstore_venv_dir }}"
 
 BLOCKSTORE_REPOS:
